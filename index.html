@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIMER 2026 - Kế Hoạch Tăng Lương Giai Độ Đệm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Oswald', sans-serif; background-color: #f8fafc; overflow: hidden; color: #1e293b; }
+        .primary-orange { color: #FF9800; }
+        .bg-primary-orange { background-color: #FF9800; }
+        .primary-teal { color: #009688; }
+        .bg-primary-teal { background-color: #009688; }
+        .primary-blue { color: #1a237e; }
+        .bg-primary-blue { background-color: #1a237e; }
+        
+        .nav-link-active { 
+            border-left: 6px solid #FF9800; 
+            background: rgba(26, 35, 126, 0.08); 
+            color: #1a237e;
+            font-weight: 700;
+        }
+        
+        .custom-scroll::-webkit-scrollbar { width: 5px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #FF9800; border-radius: 10px; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-content { animation: fadeIn 0.5s ease-out forwards; }
+
+        .sidebar-btn { transition: all 0.2s ease; border-bottom: 1px solid #f1f5f9; }
+        .sidebar-btn:hover { background-color: #f8fafc; padding-left: 2rem; }
+        
+        .quote-box { border-left: 4px solid #FF9800; background: #fffaf0; padding: 1.5rem; border-radius: 0 1rem 1rem 0; font-style: italic; }
+        .highlight-blue { background: linear-gradient(135deg, #1a237e 0%, #283593 100%); color: white; padding: 2rem; border-radius: 2rem; }
+        .code-pill { background: #e2e8f0; padding: 2px 8px; border-radius: 6px; font-family: monospace; font-weight: bold; color: #475569; }
+        
+        .comparison-card { background: white; border: 1px solid #e2e8f0; border-radius: 1rem; padding: 1.5rem; }
+        .status-badge { padding: 4px 12px; border-radius: 99px; font-size: 10px; font-bold: 700; text-transform: uppercase; letter-spacing: 1px; }
+    </style>
+</head>
+<body class="flex flex-col h-screen">
+
+    <!-- Global Header -->
+    <header class="bg-primary-blue text-white px-8 py-4 flex justify-between items-center shadow-2xl z-50">
+        <div class="flex items-center gap-4">
+            <div class="bg-primary-orange text-white w-12 h-12 flex items-center justify-center font-bold rounded-lg text-2xl shadow-inner">V</div>
+            <div>
+                <h1 class="text-2xl font-bold uppercase tracking-tighter leading-none">VIMER <span class="text-primary-orange italic">HOLDINGS</span></h1>
+                <p class="text-[10px] text-blue-200 uppercase tracking-widest mt-1">Hệ sinh thái Anchor 2026 - Powered by BSA & Build Talents</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-8">
+            <div class="text-right hidden xl:block border-l border-white/20 pl-6">
+                <p class="text-[10px] text-blue-300 uppercase font-bold tracking-widest leading-none mb-1 italic">Thông điệp từ Rosie</p>
+                <p class="text-lg font-bold text-primary-orange italic leading-none">VỮNG NỀN TẢNG - SÁNG TƯƠNG LAI</p>
+            </div>
+            <button class="bg-primary-orange hover:bg-orange-600 px-12 py-2 rounded-full text-sm font-bold shadow-lg transition transform active:scale-95 uppercase tracking-widest">
+                PHÊ DUYỆT
+            </button>
+        </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+        <!-- Sidebar Navigation -->
+        <aside class="w-80 bg-white border-r border-gray-200 flex flex-col shadow-inner">
+            <div class="p-6 bg-slate-50 border-b flex items-center gap-4">
+                <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-primary-blue font-bold">R</div>
+                <div>
+                    <h2 class="text-sm font-bold text-primary-blue uppercase tracking-tight">Rosie Đào Hạnh Giang</h2>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Chuyên gia BSA</p>
+                </div>
+            </div>
+            <nav id="sidebar-nav" class="flex-1 overflow-y-auto custom-scroll">
+                <button onclick="nav('context')" id="nav-context" class="sidebar-btn w-full text-left px-6 py-4 text-xs font-bold uppercase nav-link-active">01. BỐI CẢNH & ĐIỂM UỐN</button>
+                <button onclick="nav('bridge')" id="nav-bridge" class="sidebar-btn w-full text-left px-6 py-4 text-xs font-bold uppercase text-primary-orange">02. CHIẾN LƯỢC "BẮC CẦU"</button>
+                <button onclick="nav('captains')" id="nav-captains" class="sidebar-btn w-full text-left px-6 py-4 text-xs font-bold uppercase text-primary-blue">03. NHÓM "THUYỀN TRƯỞNG"</button>
+                <button onclick="nav('sales')" id="nav-sales" class="sidebar-btn w-full text-left px-6 py-4 text-xs font-bold uppercase text-primary-teal">04. NHÓM "ĐỘNG CƠ" SALES</button>
+                <button onclick="nav('tech')" id="nav-tech" class="sidebar-btn w-full text-left px-6 py-4 text-xs font-bold uppercase text-indigo-700">05. NHÓM "TÀI SẢN KHAN HIẾM"</button>
+                <button onclick="nav('support')" id="nav-support" class="sidebar-btn w-full text-left px-6 py-4 text-xs font-bold uppercase text-slate-500">06. NHÓM "HẬU PHƯƠNG"</button>
+                <button onclick="nav('finance')" id="nav-finance" class="sidebar-btn w-full text-left px-6 py-4 text-xs font-bold uppercase text-green-700">07. TÀI CHÍNH & NGÂN SÁCH</button>
+                <button onclick="nav('scripts')" id="nav-scripts" class="sidebar-btn w-full text-left px-6 py-4 text-xs font-bold uppercase text-red-600">08. KỊCH BẢN TRUYỀN THÔNG</button>
+                <button onclick="nav('matrix')" id="nav-matrix" class="sidebar-btn w-full text-left px-6 py-4 text-xs font-bold uppercase text-slate-500">09. MA TRẬN GIÁ TRỊ VIMER</button>
+                <button onclick="nav('roadmap')" id="nav-roadmap" class="sidebar-btn w-full text-left px-6 py-4 text-xs font-bold uppercase text-slate-500">10. LỘ TRÌNH ĐẾN 30/06</button>
+            </nav>
+            <div class="p-6 bg-primary-blue text-white rounded-tr-[50px] shadow-2xl">
+                <p class="text-xs font-bold text-primary-orange uppercase mb-1 tracking-widest leading-none">Chốt hệ thống 3Ps</p>
+                <p class="text-3xl font-bold italic leading-none">30.06.2026</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="workspace" class="flex-1 overflow-y-auto p-12 bg-white custom-scroll relative">
+            <!-- Dynamic Content -->
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 border-t border-gray-200 px-8 py-3 flex justify-between items-center z-50">
+        <div class="flex items-center gap-4 text-gray-400 text-[10px] font-bold uppercase tracking-widest">
+            <span>VIMER HOLDINGS | CONFIDENTIAL STRATEGY REPORT</span>
+            <span class="text-gray-200">|</span>
+            <span>POWERED BY BSA & BUILD TALENTS</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <span class="text-primary-blue font-bold italic text-sm">Rosie Đào Hạnh Giang</span>
+            <span class="text-gray-300">/</span>
+            <span class="text-primary-orange font-bold uppercase text-[10px] tracking-widest">BSA Project Specialist</span>
+        </div>
+    </footer>
+
+    <script>
+        const strategyData = {
+            context: {
+                title: "01. Bối Cảnh Chiến Lược & 'Điểm Uốn' Lịch Sử",
+                html: `
+                    <div class="animate-content space-y-10">
+                        <div class="quote-box text-xl text-slate-700 leading-relaxed">
+                            Tại thời điểm kết thúc năm tài chính 2025, <strong>VIMER Holdings</strong> đang đứng trước một "điểm uốn" (inflection point) mang tính lịch sử. Chúng ta đang chuyển dịch mạnh mẽ sang mô hình hệ sinh thái công nghiệp "Anchor", với trọng tâm là dự án Nhà máy lắp ráp dự kiến khởi công vào ngày 30/06/2026.
+                        </div>
+                        <div class="space-y-6 text-slate-700 text-sm">
+                            <h4 class="text-xl font-bold text-primary-blue uppercase italic border-b pb-2 tracking-widest">Sự Cấp Thiết Của Giai Đoạn Đệm</h4>
+                            <p class="leading-relaxed text-base">"Khoảng thời gian 06 tháng đầu năm 2026 không đơn thuần là thời gian chờ đợi kỹ thuật cho hệ thống 3Ps, mà là một 'khoảng trống chiến lược' chứa đựng những rủi ro nhân sự nghiêm trọng nếu không được quản trị đúng đắn."</p>
+                            <div class="p-8 bg-red-50 border border-red-100 rounded-3xl">
+                                <ul class="space-y-4">
+                                    <li class="flex gap-3"><span>●</span> <span>Dữ liệu bảng lương 2025: Tỷ lệ lương cố định (P1) tại nhiều vị trí trọng yếu chỉ chiếm khoảng <strong>10% đến 35%</strong> thu nhập.</span></li>
+                                    <li class="flex gap-3"><span>●</span> <span><strong>90% thu nhập</strong> của nhân sự then chốt nằm trong "vùng rủi ro biến động" cực lớn.</span></li>
+                                    <li class="flex gap-3"><span>●</span> <span>Nghị định 293/2025: Lương tối thiểu vùng I (5,31tr) bắt buộc phải điều chỉnh từ 01/01/2026.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            bridge: {
+                title: "02. Chiến Lược 'Bắc Cầu' (Bridging Strategy)",
+                html: `
+                    <div class="animate-content space-y-10 text-sm">
+                        <div class="bg-primary-orange/5 p-8 border-2 border-primary-orange rounded-3xl text-lg text-slate-700 leading-relaxed font-medium">
+                            Trong bối cảnh hệ thống 3Ps chưa sẵn sàng để áp dụng ngay vào tháng 1, việc áp dụng máy móc các nguyên tắc 3Ps có thể gây xáo trộn và phản ứng ngược. Thay vào đó, chúng ta sử dụng chiến lược <strong>"Bắc cầu"</strong> với các nguyên tắc sau:
+                        </div>
+                        <div class="grid grid-cols-1 gap-8">
+                            <div class="p-8 bg-white border border-slate-200 rounded-3xl shadow-sm border-t-[6px] border-t-primary-orange">
+                                <h4 class="text-xl font-bold text-primary-blue mb-4 uppercase italic">● Bảo Toàn Tổng Thu Nhập (Total Compensation Preservation)</h4>
+                                <p class="text-slate-600 leading-relaxed">
+                                    Nguyên tắc bất di bất dịch là tổng thu nhập kỳ vọng của nhân viên trong giai đoạn đệm không được thấp hơn mức trung bình năm 2025. Sự điều chỉnh sẽ diễn ra theo hướng <strong>"tái cấu trúc" tỷ trọng</strong>: Tăng lương P1 + Phụ cấp đệm, và giảm tương ứng phần KPI biến đổi.
+                                </p>
+                            </div>
+                            <div class="p-8 bg-white border border-slate-200 rounded-3xl shadow-sm border-t-[6px] border-t-primary-teal">
+                                <h4 class="text-xl font-bold text-primary-blue mb-4 uppercase italic">● Sử Dụng Phụ Cấp Thay Thế Lương P2 (Allowance as Proxy for P2)</h4>
+                                <p class="text-slate-600 leading-relaxed">
+                                    Vì chưa có hệ thống đánh giá năng lực (Competency Framework) hoàn chỉnh để trả lương P2 chính xác, chúng ta sẽ sử dụng các khoản <strong>"Phụ cấp năng lực tạm thời"</strong> hoặc <strong>"Phụ cấp kỹ năng"</strong> dựa trên các bằng chứng năng lực hiện hữu (như chứng chỉ, thâm niên, kết quả KPI quá khứ) để phân hóa thu nhập, tránh cào bằng.
+                                </p>
+                            </div>
+                            <div class="p-8 bg-white border border-slate-200 rounded-3xl shadow-sm border-t-[6px] border-t-indigo-900">
+                                <h4 class="text-xl font-bold text-primary-blue mb-4 uppercase italic">● Định Hướng Hành Vi Bằng Tên Gọi (Behavioral Nudging)</h4>
+                                <p class="text-slate-600 leading-relaxed">
+                                    Tên gọi của các khoản thu nhập trong giai đoạn này cần được đặt một cách chiến lược (ví dụ: <strong>"Phụ cấp Ổn định"</strong>, <strong>"Thưởng Cam kết"</strong>) để nhân viên hiểu rõ mục đích hỗ trợ của công ty, tránh việc họ coi đây là quyền lợi vĩnh viễn (entitlement) gây khó khăn khi chuyển đổi sang 3Ps sau này.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            captains: {
+                title: "04. Nhóm 'Thuyền Trưởng': Giám Đốc Chi Nhánh & Lãnh Đạo Cấp Cao",
+                html: `
+                    <div class="animate-content space-y-10 text-sm">
+                        <div class="p-6 bg-blue-50 border-l-4 border-primary-blue rounded-r-2xl font-bold italic text-slate-700 leading-relaxed">
+                            Phân loại: Thuộc nhóm Kim Cương (The Stars) trong Ma trận giá trị. Đây là những vị trí có tác động chiến lược cao nhất đến P&L và có độ khan hiếm lớn trên thị trường.
+                        </div>
+
+                        <section>
+                            <h4 class="text-xl font-bold text-primary-orange mb-6 uppercase italic tracking-widest border-b pb-2 inline-block">Hiện trạng thu nhập (Data Thực tế)</h4>
+                            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                                <div class="p-8 bg-white border border-slate-200 rounded-[30px] shadow-sm relative overflow-hidden">
+                                    <div class="absolute top-0 right-0 p-4 opacity-5 text-4xl">⚓</div>
+                                    <h5 class="font-bold text-primary-blue mb-4 uppercase text-xs">Giám đốc vận hành (Mã 1)</h5>
+                                    <ul class="space-y-2 leading-relaxed">
+                                        <li>Tổng thu nhập TB tháng (gồm thưởng năm): <strong class="text-primary-blue text-lg">110.345.769 VNĐ</strong></li>
+                                        <li>Lương P1 hiện tại: <span class="text-red-500 font-bold text-lg">12.000.000 VNĐ</span></li>
+                                    </ul>
+                                </div>
+                                <div class="p-8 bg-white border border-slate-200 rounded-[30px] shadow-sm relative overflow-hidden">
+                                    <div class="absolute top-0 right-0 p-4 opacity-5 text-4xl">🏢</div>
+                                    <h5 class="font-bold text-primary-blue mb-4 uppercase text-xs">Giám đốc Kinh doanh CN (Mã 26)</h5>
+                                    <ul class="space-y-2 leading-relaxed">
+                                        <li>Tổng thu nhập TB tháng: <strong class="text-primary-blue text-lg">~79.363.692 VNĐ</strong></li>
+                                        <li>Lương P1 hiện tại: <span class="text-red-600 font-bold text-lg">10.000.000 VNĐ</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="p-6 bg-red-50 border border-red-100 rounded-2xl italic font-medium leading-relaxed text-red-700">
+                                <strong>Vấn đề:</strong> Mức lương cứng (P1) chỉ chiếm khoảng 10-12% tổng thu nhập. Phần lớn thu nhập đến từ thưởng KPI tháng (40-60 triệu) và thưởng năm (300-600 triệu). Điều này đặt các lãnh đạo vào rủi ro tài chính cá nhân lớn, đồng thời mức đóng BHXH thấp cũng làm giảm giá trị phúc lợi an sinh.
+                            </div>
+                        </section>
+
+                        <section class="highlight-blue shadow-2xl relative overflow-hidden">
+                            <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-primary-orange opacity-10 rounded-full blur-3xl"></div>
+                            <h4 class="text-2xl font-bold mb-8 uppercase text-primary-orange italic border-b border-white/20 pb-4 tracking-tighter">Kế hoạch điều chỉnh (T1-T4/2026)</h4>
+                            <div class="space-y-10 leading-relaxed text-base">
+                                <div class="flex gap-6">
+                                    <div class="w-12 h-12 rounded-full bg-primary-orange flex-shrink-0 flex items-center justify-center font-bold text-xl shadow-lg">1</div>
+                                    <div>
+                                        <h5 class="font-bold text-lg mb-2 uppercase italic">Tăng mạnh Lương P1 (Lương chức danh):</h5>
+                                        <p>• Điều chỉnh mức lương P1 từ 10-12 triệu lên mức <strong>25.000.000 - 30.000.000 VNĐ/tháng</strong>.</p>
+                                        <p class="opacity-70 italic mt-1 text-sm font-light">• Cơ sở: Đưa tỷ lệ lương cứng lên khoảng 30-40% tổng thu nhập hàng tháng, tiệm cận với chuẩn thị trường C-level/Director tại các công ty quy mô tương tự.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-6">
+                                    <div class="w-12 h-12 rounded-full bg-primary-teal flex-shrink-0 flex items-center justify-center font-bold text-xl shadow-lg">2</div>
+                                    <div>
+                                        <h5 class="font-bold text-lg mb-2 uppercase italic text-white">Thiết lập "Phụ cấp Lãnh đạo Chiến lược":</h5>
+                                        <p>• Mức chi: <strong>5.000.000 - 10.000.000 VNĐ/tháng</strong>.</p>
+                                        <p class="opacity-70 italic mt-1 text-sm font-light">• Ý nghĩa: Khoản phụ cấp tạm thời thay thế cho một phần thưởng KPI, ghi nhận trách nhiệm quản trị sự thay đổi và ổn định hệ thống trong giai đoạn tái cấu trúc.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-6">
+                                    <div class="w-12 h-12 rounded-full bg-white text-primary-blue flex-shrink-0 flex items-center justify-center font-bold text-xl shadow-lg">3</div>
+                                    <div>
+                                        <h5 class="font-bold text-lg mb-2 uppercase italic">Cơ chế Thưởng Giữ chân (Retention Bonus):</h5>
+                                        <p>• Hình thức: Chính sách <strong>"Thưởng Giữ chân" trả chậm (Deferred Bonus)</strong>.</p>
+                                        <p class="opacity-70 italic mt-1 text-sm font-light">• Ví dụ: Cam kết thưởng một khoản 3-6 tháng lương vào cuối năm 2026 nếu đạt mục tiêu BSC và triển khai 3Ps thành công.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                `
+            },
+            sales: {
+                title: "05. Nhóm Kinh Doanh: 'Động Cơ Tăng Trưởng'",
+                html: `
+                    <div class="animate-content space-y-10 text-sm">
+                        <div class="p-6 bg-teal-50 border-l-4 border-primary-teal rounded-r-2xl font-bold italic text-slate-700 leading-relaxed">
+                            Phân loại: Nhóm Xương Sống (The Backbone). Chịu trách nhiệm trực tiếp cho dòng tiền và mục tiêu doanh số 8.200 xe năm 2026.
+                        </div>
+
+                        <section>
+                            <h4 class="text-xl font-bold text-primary-orange mb-6 uppercase italic tracking-widest border-b pb-2 inline-block">Hiện trạng thu nhập</h4>
+                            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                                <div class="p-8 bg-white border border-slate-200 rounded-3xl shadow-sm">
+                                    <h5 class="font-bold text-primary-blue mb-4 uppercase text-xs italic border-b pb-1">Mức lương P1 hiện trạng</h5>
+                                    <p class="text-sm italic leading-relaxed text-slate-600">
+                                        Các vị trí như Trưởng phòng Kinh doanh (<span class="code-pill">Mã 36</span>) hay Nhân viên Kinh doanh (<span class="code-pill">Mã 32, V00848, V01362</span>) có mức lương P1 rất thấp, dao động từ <strong>5.000.000 - 7.500.000 VNĐ</strong>.
+                                    </p>
+                                </div>
+                                <div class="p-8 bg-red-50 border border-red-100 rounded-3xl italic font-medium leading-relaxed text-red-700">
+                                    <strong>Vấn đề:</strong> Thu nhập phụ thuộc gần như hoàn toàn vào hoa hồng và thưởng nóng. Tháng nào thị trường chậm (Tháng 1, 2 dịp Tết), thu nhập thực tế có thể sụt giảm nghiêm trọng, gây tâm lý chán nản.
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="bg-primary-teal text-white p-12 rounded-[50px] shadow-2xl">
+                            <h4 class="text-2xl font-bold mb-8 uppercase italic border-b border-white/20 pb-4 text-white">Kế hoạch "Ổn định dòng tiền sinh hoạt"</h4>
+                            <div class="space-y-12 leading-relaxed text-base">
+                                <div>
+                                    <h5 class="font-bold text-xl mb-3 uppercase tracking-tighter">1. Nâng "Sàn Lương Cứng" (New P1 Floor):</h5>
+                                    <p class="opacity-95 italic">• Thiết lập mức lương P1 mới tối thiểu là <strong>7.000.000 VNĐ</strong> cho nhân viên chính thức và <strong>6.000.000 VNĐ</strong> cho nhân viên thử việc/học việc. Cao hơn mức tối thiểu vùng mới (5.31tr).</p>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-xl mb-3 uppercase tracking-tighter">2. Cơ chế "Lương Ứng Trước" (Draw against Commission):</h5>
+                                    <p class="opacity-95 italic">Trong các tháng thấp điểm (Tháng 1, 2), cho phép nhận khoản "Lương ứng trước" (đảm bảo thu nhập tối thiểu 10-12 triệu/tháng).</p>
+                                    <p class="p-6 bg-white/10 rounded-2xl mt-4 border border-white/10 italic">
+                                        "Khoản này được coi là một khoản vay không lãi suất và được khấu trừ dần vào hoa hồng của các tháng cao điểm sau đó (Tháng 5-12). Cơ chế này cực kỳ hiệu quả để giữ chân nhân tài mà không làm tăng chi phí thực tế của doanh nghiệp."
+                                    </p>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-xl mb-3 uppercase tracking-tighter">3. Phụ cấp Xăng xe & Điện thoại:</h5>
+                                    <p class="opacity-95 italic">• Chuẩn hóa mức <strong>1.000.000 - 1.500.000 VNĐ/tháng</strong> cho toàn bộ Sales để hỗ trợ chi phí đi thị trường thực tế.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                `
+            },
+            tech: {
+                title: "06. Nhóm Kỹ Sư & Kỹ Thuật Viên: 'Tài Sản Khan Hiếm'",
+                html: `
+                    <div class="animate-content space-y-10 text-sm">
+                        <div class="p-6 bg-indigo-50 border-l-4 border-indigo-700 rounded-r-2xl font-bold italic text-slate-700 leading-relaxed">
+                            Phân loại: Nhóm Kim Cương (Kỹ sư R&D) và Xương Sống (KTV tay nghề cao bậc 3/7+).
+                        </div>
+                        <section>
+                            <h4 class="text-xl font-bold text-primary-orange mb-6 uppercase italic tracking-widest border-b pb-2 inline-block">Hiện trạng & Rủi ro</h4>
+                            <div class="grid md:grid-cols-2 gap-8 mb-8 leading-relaxed">
+                                <div class="p-8 bg-white border border-slate-200 rounded-3xl shadow-sm">
+                                    <p>Các mã <span class="code-pill">Mã 214, 665</span> (KTV Máy gầm, Điện) có P1 chỉ <strong>5.7tr - 6tr</strong>. Rủi ro cạnh tranh cao từ Garage ngoài và xe điện sẵn sàng trả P1 cao hơn để thu hút thợ lành nghề.</p>
+                                </div>
+                                <div class="bg-indigo-900 text-white p-8 rounded-3xl italic text-center flex flex-col justify-center shadow-lg">
+                                    Mục tiêu: "Ghi nhận tay nghề thực tế" (Skill-based Recognition) ngay lập tức.
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="bg-indigo-900 text-white p-12 rounded-[50px] shadow-2xl">
+                            <h4 class="text-2xl font-bold mb-10 uppercase italic border-b border-white/20 pb-4 tracking-tighter">Kế hoạch Ghi nhận tay nghề</h4>
+                            <div class="space-y-12">
+                                <div>
+                                    <h5 class="font-bold text-lg mb-6 uppercase tracking-widest border-l-4 border-primary-orange pl-4">1. Tăng P1 theo Phân cấp Bậc thợ:</h5>
+                                    <div class="grid grid-cols-3 gap-4 text-center">
+                                        <div class="p-4 bg-white/10 rounded-2xl border border-white/10 text-sm">Học việc: 6tr</div>
+                                        <div class="p-4 bg-white/10 rounded-2xl border border-white/10 text-sm">Bậc 1-2: 7.5tr</div>
+                                        <div class="p-4 bg-white/10 rounded-2xl border border-primary-orange text-sm font-bold shadow-lg">Bậc 3+: 9-10tr</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-lg mb-6 uppercase tracking-widest border-l-4 border-primary-orange pl-4">2. Phụ cấp Kỹ năng Đặc thù (Interim):</h5>
+                                    <div class="space-y-6 leading-relaxed">
+                                        <div class="p-8 bg-white/10 rounded-3xl flex gap-6 items-center border border-white/5">
+                                            <div class="text-4xl">🔌</div>
+                                            <div>
+                                                <p class="font-bold text-primary-orange uppercase text-lg">Phụ cấp Chẩn đoán: 1.5 - 3.0 Tr/tháng.</p>
+                                                <p class="opacity-80 italic">Dành cho KTV (<span class="code-pill">Mã 523</span>) dùng máy Sinotruk, xử lý lỗi ECU. Kỹ năng "nóng" nhất.</p>
+                                            </div>
+                                        </div>
+                                        <div class="p-8 bg-white/10 rounded-3xl flex gap-6 items-center border border-white/5 border-l-4 border-red-400">
+                                            <div class="text-4xl">⚒️</div>
+                                            <div>
+                                                <p class="font-bold text-primary-orange uppercase text-lg">Kỹ thuật Nặng nhọc: 0.5 - 1.0 Tr/tháng.</p>
+                                                <p class="opacity-80 italic">Đãi ngộ nhân văn cho KTV Máy gầm môi trường vất vả, độc hại.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                `
+            },
+            support: {
+                title: "07. Nhóm Hỗ Trợ: 'Hậu Phương Vững Chắc'",
+                html: `
+                    <div class="animate-content space-y-10 text-sm">
+                        <section>
+                            <h4 class="text-xl font-bold text-primary-orange mb-6 uppercase italic tracking-widest border-b pb-2 inline-block">Hiện trạng & Kế hoạch An sinh</h4>
+                            <div class="grid md:grid-cols-2 gap-8 mb-8 text-slate-700 leading-relaxed">
+                                <div class="p-8 bg-white border border-slate-200 rounded-3xl shadow-sm">
+                                    <p>Nhân sự <span class="code-pill">Mã 12, 13, 33</span> (Kế toán, Kho) lương P1 chỉ <strong>5.000.000 VNĐ</strong>. Nhóm này ít biến động nhưng cực kỳ nhạy cảm với lạm phát.</p>
+                                </div>
+                                <div class="p-8 bg-slate-700 text-white rounded-3xl italic text-center flex flex-col justify-center shadow-lg">
+                                    Mục tiêu: "An sinh và Gắn kết" (Security & Engagement).
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="bg-slate-700 text-white p-12 rounded-[50px] shadow-2xl">
+                            <h4 class="text-2xl font-bold mb-10 uppercase italic border-b border-white/20 pb-4">Cơ cấu Phúc lợi Linh hoạt</h4>
+                            <div class="space-y-12">
+                                <div>
+                                    <h5 class="font-bold text-xl mb-4 uppercase tracking-tighter italic">1. Tăng P1 đồng loạt:</h5>
+                                    <p class="opacity-95 leading-relaxed text-base italic">• Điều chỉnh lương P1 lên <strong>6.500.000 VNĐ</strong> (vượt sàn 22%). Tạo cảm giác được bảo vệ trước áp lực vật giá.</p>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-xl mb-6 uppercase tracking-tighter italic">2. Gói Flexible Benefits:</h5>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 leading-relaxed text-base italic">
+                                        <div class="p-6 bg-white/10 rounded-2xl border border-white/5">
+                                            <p class="font-bold text-primary-orange uppercase text-xs mb-3 tracking-widest border-b border-white/10 pb-1">Tiền ăn ca:</p>
+                                            <p>Giữ mức trần miễn thuế <strong>730.000 VNĐ</strong>. Ưu tiên bếp ăn hoặc đặt cơm để tăng giá trị thực tế.</p>
+                                        </div>
+                                        <div class="p-6 bg-white/10 rounded-2xl border border-white/5">
+                                            <p class="font-bold text-primary-orange uppercase text-xs mb-3 tracking-widest border-b border-white/10 pb-1">Xăng xe/Đi lại:</p>
+                                            <p>Mở rộng mức <strong>500.000 VNĐ/tháng</strong> cho toàn bộ khối Back Office (trước đây chỉ dành cho quản lý).</p>
+                                        </div>
+                                    </div>
+                                    <div class="p-6 bg-white/10 rounded-2xl border border-white/5 mt-6 italic text-base">
+                                        <p class="font-bold text-primary-orange uppercase text-xs mb-2 tracking-widest border-b border-white/10 pb-1">Thưởng chuyên cần:</p>
+                                        <p><strong>500.000 VNĐ/tháng</strong> nếu đảm bảo ngày công. Khuyến khích kỷ luật tích cực.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                `
+            },
+            finance: {
+                title: "08. TÀI CHÍNH VÀ CHIẾN LƯỢC NGÂN SÁCH",
+                html: `
+                    <div class="animate-content space-y-12 text-sm text-slate-700">
+                        <div class="p-8 bg-green-50 border-l-4 border-green-600 rounded-r-3xl leading-relaxed text-base italic">
+                            Việc tăng lương P1 chắc chắn sẽ làm tăng chi phí đóng Bảo hiểm Xã hội (BHXH), Bảo hiểm Y tế (BHYT) và Kinh phí Công đoàn. Ước tính chi phí BHXH sẽ <strong>tăng khoảng 21.5%</strong> trên phần chênh lệch lương P1 tăng thêm. Để đảm bảo sức khỏe tài chính cho VIMER Holdings, chúng ta áp dụng chiến lược <strong>"Chuyển đổi Ví tiền" (Wallet Reallocation)</strong>.
+                        </div>
+
+                        <section>
+                            <h4 class="text-xl font-bold text-primary-blue uppercase italic tracking-widest border-b pb-2 mb-6">8.1. Nguyên Tắc Tái Phân Bổ Ngân Sách</h4>
+                            <p class="mb-4 font-bold text-slate-600 uppercase text-xs tracking-widest">Chiến lược dòng tiền:</p>
+                            <p class="mb-8 italic leading-relaxed text-lg border-l-2 pl-4 border-slate-200">"Quỹ lương tổng (Total Payroll Cost) không nhất thiết tăng đột biến, mà trích chuyển từ một phần quỹ thưởng KPI và thưởng năm dự kiến sang lương cố định P1."</p>
+                            
+                            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-10 shadow-inner">
+                                <h5 class="font-bold text-primary-blue uppercase text-xs mb-8 tracking-widest text-center italic">Ví dụ minh họa (Đối với 1 nhân sự)</h5>
+                                <div class="grid md:grid-cols-2 gap-10">
+                                    <div class="p-8 bg-white rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-center">
+                                        <p class="font-bold text-slate-400 uppercase text-[10px] mb-3 tracking-widest">Mô hình cũ (2025)</p>
+                                        <p class="text-xl font-bold text-slate-600">Lương P1 (5tr) + KPI (15tr) = <strong class="text-primary-blue text-2xl leading-none">20tr</strong></p>
+                                        <p class="text-[11px] italic text-slate-400 mt-4 italic leading-tight">Doanh nghiệp đóng BHXH trên nền 5tr.</p>
+                                    </div>
+                                    <div class="p-8 bg-white rounded-2xl border-2 border-primary-orange shadow-md relative flex flex-col justify-center">
+                                        <div class="absolute -top-3 right-6 bg-primary-orange text-white text-[10px] font-bold px-4 py-1 rounded-full uppercase shadow-lg">Giai đoạn đệm (2026)</div>
+                                        <p class="font-bold text-primary-orange uppercase text-[10px] mb-3 tracking-widest">Cấu trúc đề xuất</p>
+                                        <p class="text-xl font-bold text-slate-700">Lương P1 (8tr) + Phụ cấp (2tr) + KPI (10tr) = <strong class="text-primary-orange text-2xl leading-none">20tr</strong></p>
+                                        <p class="text-[11px] italic text-slate-500 mt-4 font-bold uppercase tracking-tight leading-tight">Doanh nghiệp đóng BHXH trên nền 8tr.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-8 p-10 bg-primary-blue text-white rounded-[40px] italic leading-relaxed text-base shadow-2xl">
+                                <strong>Đánh giá tài chính:</strong> Doanh nghiệp sẽ tốn thêm chi phí BHXH cho phần chênh lệch 3 triệu đồng (khoảng <strong>645.000 VNĐ/người/tháng</strong>). Đổi lại là sự tuân thủ pháp luật 100% và sự an tâm của VIMER – mức <strong>"phí bảo hiểm giữ người"</strong> cực kỳ xứng đáng.
+                            </div>
+                        </section>
+
+                        <section>
+                            <h4 class="text-xl font-bold text-primary-blue uppercase italic tracking-widest border-b pb-2 mb-6">8.2. Quản Lý Các Khoản Phụ Cấp Đệm</h4>
+                            <p class="mb-6 italic text-base">Để tránh rủi ro pháp lý, các khoản phụ cấp cần quản lý chặt bằng văn bản:</p>
+                            <div class="space-y-8 ml-6">
+                                <div>
+                                    <p class="font-bold uppercase text-xs mb-3 tracking-widest text-primary-teal">● Tên gọi sáng tạo:</p>
+                                    <div class="flex flex-wrap gap-4">
+                                        <span class="code-pill">"Phụ cấp Chuyển đổi Số"</span>
+                                        <span class="code-pill">"Phụ cấp Gắn kết 2026"</span>
+                                        <span class="code-pill">"Hỗ trợ Ổn định Thu nhập"</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-bold uppercase text-xs mb-3 tracking-widest text-primary-teal">● Văn bản hóa (Trích mẫu):</p>
+                                    <div class="p-10 bg-slate-50 border-2 border-dashed border-slate-300 rounded-3xl italic leading-relaxed text-slate-500 shadow-inner text-base">
+                                        "Ghi rõ trong Phụ lục HĐLĐ: 'Khoản phụ cấp này có hiệu lực từ <strong>01/01/2026 đến 30/06/2026</strong>. Sau thời gian này, khoản phụ cấp sẽ được rà soát và chuyển đổi sang cơ chế Lương Năng lực (P2) phù hợp với hệ thống 3Ps mới'."
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                `
+            },
+            scripts: {
+                title: "09. Kịch Bản Truyền Thông (Manager Scripts)",
+                html: `
+                    <div class="animate-content space-y-12 text-sm text-slate-700">
+                        <div class="grid grid-cols-1 gap-10">
+                            <div class="p-12 bg-white border border-slate-200 rounded-[50px] shadow-sm italic leading-relaxed text-slate-600 text-lg quote-box relative">
+                                <div class="absolute top-4 right-8 status-badge bg-primary-teal text-white">SALES SCRIPT</div>
+                                <h5 class="font-bold text-primary-teal uppercase text-xs mb-4 tracking-widest border-b pb-1">Dành cho cấp quản lý nói với Sales</h5>
+                                "Holdings hiểu rằng những tháng đầu năm doanh số thường chậm. Do đó, cơ chế lương đệm này nâng mức lương cứng lên 7 triệu đồng và hỗ trợ ứng lương để các em hoàn toàn yên tâm về thu nhập, tập trung chăm sóc khách hàng và chuẩn bị cho mùa cao điểm sắp tới."
+                            </div>
+                            <div class="p-12 bg-white border border-slate-200 rounded-[50px] shadow-sm italic leading-relaxed text-slate-600 text-lg quote-box relative" style="border-left-color: #64748b;">
+                                <div class="absolute top-4 right-8 status-badge bg-slate-500 text-white">BACK-OFFICE SCRIPT</div>
+                                <h5 class="font-bold text-slate-500 uppercase text-xs mb-4 tracking-widest border-b pb-1">Dành cho cấp quản lý nói với Hỗ trợ</h5>
+                                "Việc điều chỉnh tăng lương P1 và thêm phụ cấp xăng xe là sự ghi nhận của VIMER đối với đóng góp thầm lặng của bộ phận văn phòng. Holdings muốn đảm bảo các bạn có thu nhập ổn định và an toàn hơn trước những biến động giá cả bên ngoài."
+                            </div>
+                        </div>
+                        <div class="bg-primary-blue p-12 rounded-[60px] text-white shadow-2xl text-center">
+                            <h4 class="text-3xl font-bold uppercase text-primary-orange mb-8 italic tracking-tighter border-b border-white/10 pb-4">TRIẾT LÝ: "LÙI 1 TIẾN 3"</h4>
+                            <div class="grid md:grid-cols-2 gap-12 text-base leading-relaxed text-left">
+                                <div class="space-y-4">
+                                    <p class="font-bold text-red-400 uppercase tracking-widest italic border-b border-white/10 pb-2">Lùi 1:</p>
+                                    <p class="opacity-90 italic">Chấp nhận tăng chi phí vận hành ngắn hạn (BHXH, phụ cấp) để tuân thủ pháp luật và chia sẻ rủi ro tài chính với người lao động.</p>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="font-bold text-primary-teal uppercase tracking-widest italic border-b border-white/10 pb-2">Tiến 3:</p>
+                                    <ul class="opacity-90 italic space-y-1">
+                                        <li>(1) Giữ chân nhân tài cốt lõi trong giai đoạn nhạy cảm nhất.</li>
+                                        <li>(2) Ổn định tâm lý, kích phát động lực bứt phá mục tiêu 8.200 xe.</li>
+                                        <li>(3) Nền tảng tâm lý tốt cho 3Ps GO-LIVE 30/06.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            matrix: {
+                title: "03. Ma Trận Giá Trị VIMER Holdings",
+                html: `<div class="animate-content grid grid-cols-2 gap-6 text-white text-sm">
+                    <div class="p-10 bg-primary-orange rounded-[40px] shadow-lg">
+                        <h5 class="text-2xl font-bold uppercase mb-4 tracking-tighter">1. Kim Cương</h5>
+                        <p class="opacity-90 italic leading-relaxed">Lãnh đạo cấp cao, GĐ Khối, Kỹ sư R&D. Chiến lược: Giữ chân bằng mọi giá.</p>
+                    </div>
+                    <div class="p-10 bg-primary-teal rounded-[40px] shadow-lg">
+                        <h5 class="text-2xl font-bold uppercase mb-4 tracking-tighter">2. Cốt Lõi</h5>
+                        <p class="opacity-90 italic leading-relaxed">Kỹ sư dự án, Sales Manager. Chiến lược: Phát triển & Ghi nhận.</p>
+                    </div>
+                    <div class="p-10 bg-primary-blue rounded-[40px] shadow-lg">
+                        <h5 class="text-2xl font-bold uppercase mb-4 tracking-tighter">3. Xương Sống</h5>
+                        <p class="opacity-90 italic leading-relaxed">Sales, KTV Workshop. Chiến lược: Hiệu suất & Ổn định.</p>
+                    </div>
+                    <div class="p-10 bg-slate-400 rounded-[40px] shadow-lg">
+                        <h5 class="text-2xl font-bold uppercase mb-4 tracking-tighter">4. Hỗ Trợ</h5>
+                        <p class="opacity-90 italic leading-relaxed">Hành chính, Kế toán, Kho. Chiến lược: Tối ưu & Số hóa.</p>
+                    </div>
+                </div>`
+            },
+            roadmap: {
+                title: "10. Lộ Trình Triển Khai Thực Chiến",
+                html: `
+                    <div class="animate-content pl-12 border-l-4 border-primary-orange space-y-16">
+                        <div class="relative"><div class="absolute -left-[42px] top-0 w-14 h-14 bg-primary-orange rounded-full border-8 border-white flex items-center justify-center text-white font-bold text-lg">01</div><h5 class="text-xl font-bold uppercase italic">Tháng 12/2025: Phê duyệt Chiến lược</h5></div>
+                        <div class="relative"><div class="absolute -left-[42px] top-0 w-14 h-14 bg-primary-teal rounded-full border-8 border-white flex items-center justify-center text-white font-bold text-lg">02</div><h5 class="text-xl font-bold uppercase italic">01/01/2026: Launch Bridging Pay</h5></div>
+                        <div class="relative"><div class="absolute -left-[42px] top-0 w-14 h-14 bg-green-600 border-8 border-white flex items-center justify-center text-white font-bold text-lg shadow-xl">03</div><h5 class="text-2xl font-bold uppercase italic tracking-widest text-primary-blue font-extrabold leading-none">30/06/2026: 3Ps GO-LIVE & ANCHOR FACTORY</h5></div>
+                    </div>
+                `
+            }
+        };
+
+        function nav(id) {
+            document.querySelectorAll('.sidebar-btn').forEach(btn => {
+                btn.classList.remove('nav-link-active');
+            });
+            const activeBtn = document.getElementById('nav-' + id);
+            if(activeBtn) activeBtn.classList.add('nav-link-active');
+            
+            const workspace = document.getElementById('workspace');
+            const data = strategyData[id];
+            workspace.innerHTML = `
+                <div class="mb-12 flex justify-between items-end border-b-4 border-primary-blue pb-6">
+                    <h2 class="text-5xl font-extrabold text-primary-blue uppercase tracking-tighter leading-tight">${data.title}</h2>
+                    <span class="text-[10px] font-bold text-slate-300 uppercase tracking-widest italic mb-2">Master Archive 2026</span>
+                </div>
+                ${data.html}
+            `;
+            workspace.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onload = () => nav('context');
+    </script>
+</body>
+</html>
